@@ -1,10 +1,12 @@
 <template>
-  <form class="addlist" @submit.prevent="addList">
+  <form :class="classList" @submit.prevent="addList">
     <input
       v-model="title"
       type="text"
       class="text-input"
       placeholder="Add new list"
+      @focusin="startEditing"
+      @focusout="finishEditing"
     />
     <button type="submit" class="add-button">Add</button>
   </form>
@@ -12,17 +14,33 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      title: '',
-    }
+      title: "",
+      isEditing: false,
+    };
+  },
+  computed: {
+    classList() {
+      const classList = ["addlist"];
+      if (this.isEditing) {
+        classList.push("active");
+      }
+      return classList;
+    },
   },
 
   methods: {
-    addList: function() {
-      this.$store.dispatch('addlist', { title: this.title })
-      this.title = ''
+    addList() {
+      this.$store.dispatch("addlist", { title: this.title });
+      this.title = "";
     },
-  }
+    startEditing() {
+      this.isEditing = true;
+    },
+    finishEditing() {
+      this.isEditing = false;
+    },
+  },
 };
 </script>
