@@ -4,13 +4,16 @@
       <p class="list-title">
         {{ title }}
       </p>
+      <p class="list-counter">total: {{ totalCardList }}</p>
       <div class="deletelist" @click="removeList">ｘ</div>
     </div>
-    <card v-for="(item, index) in cards"
-    :body = "item.body"
-    :key="item.id"
-    :cardIndex="index"
-    :listIndex="listIndex" />
+    <card
+      v-for="(item, index) in cards"
+      :body="item.body"
+      :key="item.id"
+      :cardIndex="index"
+      :listIndex="listIndex"
+    />
     <card-add :listIndex="listIndex" />
   </div>
 </template>
@@ -22,7 +25,7 @@ import Card from "./Card";
 export default {
   components: {
     CardAdd,
-    Card
+    Card,
   },
   props: {
     title: {
@@ -36,6 +39,11 @@ export default {
     listIndex: {
       type: Number,
       required: true,
+    },
+  },
+  computed: {
+    totalCardList() {
+      return this.cards.length;
     },
   },
   methods: {
