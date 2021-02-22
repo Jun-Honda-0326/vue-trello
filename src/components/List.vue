@@ -6,11 +6,17 @@
       </p>
       <div class="deletelist" @click="removeList">ｘ</div>
     </div>
+    <card-add :listIndex="listIndex" />
   </div>
 </template>
 
 <script>
+import CardAdd from './CardAdd'
+
 export default {
+  components: {
+    CardAdd
+  },
   props: {
     title: {
       type: String,
