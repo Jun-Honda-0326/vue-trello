@@ -44,7 +44,7 @@ export default {
     },
   },
   methods: {
-    addCardaToList: function () {
+    addCardToList: function () {
       this.$store.dispatch("addCardToList", {
         body: this.body,
         listIndex: this.listIndex,
